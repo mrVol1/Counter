@@ -20,17 +20,9 @@ class ViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         incrementCounter.text = textLable + "\(count)"
-        changeHistory.delegate = self
-    }
-    
-    func changeHistory(_ textView: UITextView, shouldChangeTextIn _: NSRange, replacementText text: String) -> Bool {
-        let resultRange = text.rangeOfCharacter(from: CharacterSet.newlines, options: .backwards)
-        if text.count == 1 && resultRange != nil {
-            textView.resignFirstResponder()
-            // Do any additional stuff here
-            return false
-        }
-        return true
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tapGesture)
+        tapGesture.cancelsTouchesInView = false
     }
     
     
