@@ -9,7 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
     var count: Int = 0
-    var buttonTap: Bool = false
+    var buttonTapPlus: Bool = false
+    var buttonTapMinus: Bool = false
     @IBOutlet weak var incrementCounter: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,12 +18,23 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func counterButton(_ sender: Any) {
-        while buttonTap == true {
+    @IBAction func counterButtonPlus(_ sender: Any) {
+        while buttonTapPlus == true {
         }
             count += 1
             print(count)
             incrementCounter.text = "Значение счетчика: \(count)"
     }
     
-}
+    @IBAction func counterButtonMinus(_ sender: Any) {
+        while buttonTapMinus == true {
+        }
+            count -= 1
+            print(count)
+        if count >= 0 {
+            incrementCounter.text = "Значение счетчика: \(count)"
+        } else {
+            count = 0
+        }
+    }
+    }
