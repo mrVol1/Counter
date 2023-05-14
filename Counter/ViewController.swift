@@ -25,8 +25,6 @@ class ViewController: UIViewController, UITextViewDelegate {
         tapGesture.cancelsTouchesInView = false
     }
     
-    
-    
     @IBAction func counterButtonPlus(_ sender: Any) {
         while buttonTapPlus == true {
         }
@@ -38,8 +36,6 @@ class ViewController: UIViewController, UITextViewDelegate {
         dateFormatter.timeZone = TimeZone.current
         let todaysDate = dateFormatter.string(from: date)
         print(todaysDate)
-        
-        changeHistory.text = "История изменений"
         
         changeHistory.insertText("\n" + todaysDate + "," + " " + "Значение:" + " " + "\(count)")
     }
@@ -54,6 +50,14 @@ class ViewController: UIViewController, UITextViewDelegate {
         } else {
             count = 0
         }
+        
+        dateFormatter.dateFormat = "MM/dd/yyyy, hh:mm"
+        dateFormatter.timeZone = TimeZone.current
+        let todaysDate = dateFormatter.string(from: date)
+        print(todaysDate)
+        
+        changeHistory.insertText("\n" + todaysDate + "," + " " + "Значение:" + " " + "\(count)")
+        
     }
     
     @IBAction func restartButton(_ sender: Any) {
