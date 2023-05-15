@@ -20,9 +20,6 @@ class ViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         incrementCounter.text = textLable + "\(count)"
-        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
-        view.addGestureRecognizer(tapGesture)
-        tapGesture.cancelsTouchesInView = false
     }
     
     @IBAction func counterButtonPlus(_ sender: Any) {
