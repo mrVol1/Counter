@@ -7,55 +7,60 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextViewDelegate {
+class ViewController: UIViewController {
     var count: Int = 0
     var buttonTapPlus: Bool = false
     var buttonTapMinus: Bool = false
     var restartButtonTap: Bool = false
     let textLable: String = "Значение счетчика: "
+    let textChangeHistory: String = "Значение: "
+    let textChangeHistoryLessThanZero: String = "Попытка уменьшить значение счётчика ниже 0"
+    let textRestart: String = "Значение сброшено"
     let dateFormatter = DateFormatter()
     var date: Date = Date()
     
+    
+    // Описание лейбла с текстом
     @IBOutlet weak var incrementCounter: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        // отображается текущение значение счетчика
         incrementCounter.text = textLable + "\(count)"
     }
     
+    // Кнопка увеличения count + 1
     @IBAction func counterButtonPlus(_ sender: Any) {
         while buttonTapPlus == true {
         }
             count += 1
-            print(count)
             incrementCounter.text = textLable + "\(count)"
         
         dateFormatter.dateFormat = "MM/dd/yyyy, hh:mm"
         dateFormatter.timeZone = TimeZone.current
         let todaysDate = dateFormatter.string(from: date)
-        print(todaysDate)
         
-        changeHistory.insertText("\n" + todaysDate + "," + " " + "Значение:" + " " + "\(count)")
+        changeHistory.insertText("\n" + todaysDate + "," + " " + textChangeHistory + " " + "\(count)")
     }
     
+    // Кнопка уменьшения count - 1
     @IBAction func counterButtonMinus(_ sender: Any) {
         dateFormatter.dateFormat = "MM/dd/yyyy, hh:mm"
         dateFormatter.timeZone = TimeZone.current
         let todaysDate = dateFormatter.string(from: date)
-        print(todaysDate)
         
         while buttonTapMinus == true {
         }
             count -= 1
-            print(count)
         if count >= 0 {
             incrementCounter.text = textLable + "\(count)"
-            changeHistory.insertText("\n" + todaysDate + "," + " " + "Значение:" + " " + "\(count)")
+            changeHistory.insertText("\n" + todaysDate + "," + " " + textChangeHistory + " " + "\(count)")
         } else {
             count = 0
-            changeHistory.insertText("\n" + todaysDate + "," + " " + "Попытка уменьшить значение счётчика ниже 0")
+            changeHistory.insertText("\n" + todaysDate + "," + " " + textChangeHistoryLessThanZero)
         }
     }
     
+    // Кнопка сброса
     @IBAction func restartButton(_ sender: Any) {
         while restartButtonTap == true {
         }
@@ -65,10 +70,9 @@ class ViewController: UIViewController, UITextViewDelegate {
         dateFormatter.dateFormat = "MM/dd/yyyy, hh:mm"
         dateFormatter.timeZone = TimeZone.current
         let todaysDate = dateFormatter.string(from: date)
-        print(todaysDate)
         
-        changeHistory.insertText("\n" + todaysDate + "," + " " + "Значение сброшено")
+        changeHistory.insertText("\n" + todaysDate + "," + " " + textRestart)
     }
-        
+        // TextView на экране
     @IBOutlet weak var changeHistory: UITextView!
 }
