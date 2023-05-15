@@ -41,23 +41,22 @@ class ViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func counterButtonMinus(_ sender: Any) {
+        dateFormatter.dateFormat = "MM/dd/yyyy, hh:mm"
+        dateFormatter.timeZone = TimeZone.current
+        let todaysDate = dateFormatter.string(from: date)
+        print(todaysDate)
+        
         while buttonTapMinus == true {
         }
             count -= 1
             print(count)
         if count >= 0 {
             incrementCounter.text = textLable + "\(count)"
+            changeHistory.insertText("\n" + todaysDate + "," + " " + "Значение:" + " " + "\(count)")
         } else {
             count = 0
+            changeHistory.insertText("\n" + todaysDate + "," + " " + "Попытка уменьшить значение счётчика ниже 0")
         }
-        
-        dateFormatter.dateFormat = "MM/dd/yyyy, hh:mm"
-        dateFormatter.timeZone = TimeZone.current
-        let todaysDate = dateFormatter.string(from: date)
-        print(todaysDate)
-        
-        changeHistory.insertText("\n" + todaysDate + "," + " " + "Значение:" + " " + "\(count)")
-        
     }
     
     @IBAction func restartButton(_ sender: Any) {
@@ -65,6 +64,13 @@ class ViewController: UIViewController, UITextViewDelegate {
         }
         count = 0
         incrementCounter.text = textLable + "\(count)"
+        
+        dateFormatter.dateFormat = "MM/dd/yyyy, hh:mm"
+        dateFormatter.timeZone = TimeZone.current
+        let todaysDate = dateFormatter.string(from: date)
+        print(todaysDate)
+        
+        changeHistory.insertText("\n" + todaysDate + "," + " " + "Значение сброшено")
     }
         
     @IBOutlet weak var changeHistory: UITextView!
